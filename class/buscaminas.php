@@ -9,7 +9,7 @@ class Buscaminas
     public $terminado;
     public $estado;
 
-    // ----------------------------------------------------------
+// ----------------------------------------------------------
     public function __construct($tam, $jugadorId)
     {
         $this->tabVisible = [];
@@ -20,7 +20,7 @@ class Buscaminas
         $this->estado = 0;
     }
 
-    // ----------------------------------------------------------
+// ----------------------------------------------------------
     public function getTabVisible()
     {
         return $this->tabVisible;
@@ -71,22 +71,34 @@ class Buscaminas
         $this->terminado = $value;
     }
 
-    public function getEstado()
-    {
+    public function getEstado() {
         return $this->estado;
     }
 
-    public function setEstado($value)
-    {
+    public function setEstado($value) {
         $this->estado = $value;
     }
 
-    // ----------------------------------------------------------
+// ----------------------------------------------------------
     public function __toString()
     {
         return '{Tamaño: ' . $this->tam . ', Tablero: ' . print_r($this->tabOculto) . '}';
     }
 
-    // ----------------------------------------------------------
+// ----------------------------------------------------------
+    public function iniciarTablero($tam)
+    {
+        $this->tabVisible = array_fill(0, $tam, 'X');
 
+        return $this->tabVisible;
+    }
+
+    public function iniciarTableroOculto()
+    {
+        $this->tabOculto = array_fill(0, count($this->tabVisible), 0);
+
+        return $this->tabOculto;
+    }
+    
 }
+
