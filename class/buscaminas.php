@@ -99,6 +99,35 @@ class Buscaminas
 
         return $this->tabOculto;
     }
-    
+
+    public function addMinas($mina)
+    {
+        while ($mina > 0 && $mina < $this->tam) {
+            $azar = rand(0, count($this->tabOculto) - 1);
+
+            if ($this->tabOculto[$azar] === 0) {
+                $tabOculto[$azar] = '*';
+                $mina--;
+            }
+        }
+
+        $this->tabOculto;
+    }
+
+    public function addPistas()
+    {
+        for ($i = 0; $i < count($this->tabOculto); $i++) {
+            if ($this->tabOculto[$i] != '*') {
+                if ($this->tabOculto[$i - 1] === '*' && $this->tabOculto[$i + 1] === '*') {
+                    $this->tabOculto[$i] = 2;
+                }
+
+                if ($this->tabOculto[$i - 1] === '*' || $this->tabOculto[$i + 1] === '*') {
+                    $this->tabOculto[$i] = 1;
+                }
+            }
+        }
+    }
+
 }
 
