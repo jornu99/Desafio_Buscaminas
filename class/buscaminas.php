@@ -129,5 +129,39 @@ class Buscaminas
         }
     }
 
+    public function destaparCasilla($pos)
+    {
+        $this->tabVisible[$pos] = $this->tabOculto[$pos];
+    }
+
+    public function estadoPartida()
+    {
+        $casilla = 0;
+        $mina = 0;
+
+        for ($i = 0; $i < count($this->tabOculto); $i++) {
+            if ($this->tabOculto[$i] === '*') {
+                $mina++;
+            }
+        }
+
+        for ($i = 0; $i < count($this->tabOculto); $i++) {
+            if ($this->tabOculto[$i] !== '*') {
+                $casilla++;
+            }
+        }
+
+        if (in_array('*', $this->tabVisible)) {
+            $this->terminado = true;
+            $this->estado = -1;
+        }
+
+        if ($casilla === count($this->tabOculto) - $mina) {
+            $this->terminado = true;
+            $this->estado = 1;
+        }
+
+        return $this->estado;
+    }
 }
 
