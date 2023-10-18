@@ -2,6 +2,7 @@
 
 class Buscaminas
 {
+    public $id;
     public $tabVisible;
     public $tabOculto;
     public $tam;
@@ -10,17 +11,26 @@ class Buscaminas
     public $estado;
 
 // ----------------------------------------------------------
-    public function __construct($tam, $jugadorId)
+    public function __construct()
     {
+        $this->id = 0;
         $this->tabVisible = [];
         $this->tabOculto = [];
-        $this->tam = $tam;
-        $this->jugadorId = $jugadorId;
+        $this->tam = 0;
+        $this->jugadorId;
         $this->terminado = false;
         $this->estado = 0;
     }
 
 // ----------------------------------------------------------
+    public function getId() {
+        return $this->id;
+    }
+
+    public function setId($value) {
+        $this->id = $value;
+    }
+
     public function getTabVisible()
     {
         return $this->tabVisible;
@@ -82,7 +92,7 @@ class Buscaminas
 // ----------------------------------------------------------
     public function __toString()
     {
-        return '{Tamaño: ' . $this->tam . ', Tablero: ' . print_r($this->tabOculto) . '}';
+        return '{ID: ' . $this->id . 'Tamaño: ' . $this->tam . ', Tablero: ' . print_r($this->tabOculto) . '}';
     }
 
 // ----------------------------------------------------------
@@ -106,12 +116,12 @@ class Buscaminas
             $azar = rand(0, count($this->tabOculto) - 1);
 
             if ($this->tabOculto[$azar] === 0) {
-                $tabOculto[$azar] = '*';
+                $this->tabOculto[$azar] = '*';
                 $mina--;
             }
         }
 
-        $this->tabOculto;
+        return $this->tabOculto;
     }
 
     public function addPistas()
@@ -131,7 +141,9 @@ class Buscaminas
 
     public function destaparCasilla($pos)
     {
-        $this->tabVisible[$pos] = $this->tabOculto[$pos];
+        if($this->tabVisible[$pos] === 'X') {
+            $this->tabVisible[$pos] = $this->tabOculto[$pos];
+        }
     }
 
     public function estadoPartida()
@@ -164,4 +176,3 @@ class Buscaminas
         return $this->estado;
     }
 }
-
